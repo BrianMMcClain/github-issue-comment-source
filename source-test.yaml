@@ -1,0 +1,26 @@
+apiVersion: sources.knative.dev/v1
+kind: ContainerSource
+metadata:
+  name: gh-issue-source
+spec:
+  template:
+    spec:
+      containers:
+        - image: brianmmcclain/github-issue-comment-source
+          name: github-issue-comment-source
+          args:
+            - --owner=BrianMMcClain
+            - --repo=github-issue-comment-source
+            - --issue=1
+            - --interval=60
+            - --fromBeginning
+          env:
+            - name: POD_NAME
+              value: "github-issue-comment-source"
+            - name: POD_NAMESPACE
+              value: "default"
+  sink:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: logger
