@@ -46,5 +46,25 @@ kubectl apply -f source-test.yaml
 Once deployed, you should see output that looks similar to the following:
 
 ```
+D, [2021-04-27T16:52:44.143432 #1] DEBUG -- : --- START POST ---
+D, [2021-04-27T16:52:44.143486 #1] DEBUG -- : {"message":"Here's a comment","id":827708782,"user":"BrianMMcClain","timestamp":"2021-04-27T15:41:25Z","url":"https://github.com/BrianMMcClain/github-issue-comment-source/issues/1#issuecomment-827708782","owner":"BrianMMcClain","repo":"github-issue-comment-source","issue":"1"}
+D, [2021-04-27T16:52:44.143508 #1] DEBUG -- : --- END POST ---
+10.244.0.10, 10.244.0.5 - - [27/Apr/2021:16:52:44 +0000] "POST / HTTP/1.1" 200 277 0.0021
+127.0.0.1 - - [27/Apr/2021:16:52:44 UTC] "POST / HTTP/1.1" 200 277
+- -> /
+D, [2021-04-27T16:52:44.153934 #1] DEBUG -- : --- START POST ---
+D, [2021-04-27T16:52:44.153978 #1] DEBUG -- : {"message":"And here's another one!","id":827708866,"user":"BrianMMcClain","timestamp":"2021-04-27T15:41:33Z","url":"https://github.com/BrianMMcClain/github-issue-comment-source/issues/1#issuecomment-827708866","owner":"BrianMMcClain","repo":"github-issue-comment-source","issue":"1"}
+D, [2021-04-27T16:52:44.154020 #1] DEBUG -- : --- END POST ---
+```
 
+To clean up you can delete the event source with:
+
+```
+kubectl delete -f source-test.yaml
+```
+
+And you can delete the logger service with:
+
+```
+kn service delete logger
 ```
